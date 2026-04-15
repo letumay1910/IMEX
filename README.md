@@ -4,773 +4,899 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="IMEX - Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động">
-    <title>IMEX - Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động</title>
+    <title>IMEX | Thiết bị di động chính hãng - Mua sắm thông minh</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome cho icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Roboto:wght@700&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Roboto:wght@400;500&amp;display=swap');
         
         :root {
-            --red: #e30613;
+            --primary: #001f3f; /* Xanh dương đậm chính thức */
+            --accent: #0074d9;  /* Xanh dương nổi bật */
         }
         
         * {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-        
-        .tailwind-ready .bg-primary { background-color: #e30613; }
-        .tailwind-ready .text-primary { color: #e30613; }
-        .tailwind-ready .border-primary { border-color: #e30613; }
-        
-        .hero-bg {
-            background: linear-gradient(135deg, #e30613 0%, #b2000f 100%);
+            font-family: 'Inter', system_ui, sans-serif;
         }
         
         .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover {
+            color: #0074d9;
+            transform: translateY(-1px);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
+        }
+        
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgb(0 31 63 / 0.25);
+        }
+        
+        .section-header {
             position: relative;
         }
         
-        .nav-link:after {
+        .section-header::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #e30613;
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgb(227 6 19 / 0.1), 0 8px 10px -6px rgb(227 6 19 / 0.1);
-        }
-        
-        .section-title {
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background-color: #e30613;
+            width: 80px;
+            height: 4px;
+            background: #0074d9;
             bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
+            border-radius: 9999px;
         }
         
-        .phone-float {
-            animation: float 3s ease-in-out infinite;
+        .cart-count {
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
     </style>
 </head>
-<body class="tailwind-ready font-sans">
+<body class="bg-white text-gray-900">
     <!-- NAVBAR -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <nav class="bg-[#001f3f] text-white sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9 bg-[#e30613] rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-inner">📱</div>
-                    <h1 class="text-3xl font-bold tracking-[-1px]">
-                        <span class="text-[#e30613]">IMEX</span>
-                    </h1>
-                    <span class="text-xs font-medium bg-[#e30613] text-white px-2.5 py-0.5 rounded-full mt-1">Thiết bị di động</span>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-[#001f3f] font-bold text-3xl shadow-inner">
+                        📱
+                    </div>
+                    <div>
+                        <span class="text-3xl font-bold tracking-tighter">IMEX</span>
+                        <span class="text-xs font-medium text-[#0074d9] block -mt-1">MOBILE</span>
+                    </div>
                 </div>
 
-                <!-- Menu Desktop -->
-                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="#" onclick="navigateToSection('home')" class="nav-link text-gray-700 hover:text-[#e30613]">Trang chủ</a>
-                    <a href="#" onclick="navigateToSection('san-pham')" class="nav-link text-gray-700 hover:text-[#e30613]">Sản phẩm</a>
-                    <a href="#" onclick="navigateToSection('tinh-nang')" class="nav-link text-gray-700 hover:text-[#e30613]">Tính năng</a>
-                    <a href="#" onclick="navigateToSection('he-sinh-thai')" class="nav-link text-gray-700 hover:text-[#e30613]">Hệ sinh thái</a>
-                    <a href="#" onclick="navigateToSection('cong-dong')" class="nav-link text-gray-700 hover:text-[#e30613]">Cộng đồng</a>
-                    <a href="#" onclick="navigateToSection('bao-hanh')" class="nav-link text-gray-700 hover:text-[#e30613]">Bảo hành</a>
+                <!-- Menu -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#" onclick="navigateToSection('home')" class="nav-link">Trang chủ</a>
+                    <a href="#" onclick="navigateToSection('products')" class="nav-link">Sản phẩm</a>
+                    <a href="#" onclick="navigateToSection('services')" class="nav-link">Dịch vụ</a>
+                    <a href="#" onclick="navigateToSection('about')" class="nav-link">Về IMEX</a>
+                    <a href="#" onclick="navigateToSection('blog')" class="nav-link">Blog &amp; Tin tức</a>
                 </div>
 
-                <div class="flex items-center gap-x-4">
+                <!-- Right side -->
+                <div class="flex items-center gap-6">
                     <!-- Search -->
-                    <div class="relative hidden sm:block">
-                        <input 
-                            type="text" 
-                            id="search-input"
-                            placeholder="Tìm điện thoại, máy tính bảng..." 
-                            class="w-72 bg-gray-100 border border-gray-200 focus:border-[#e30613] focus:bg-white rounded-full py-2 pl-10 pr-4 text-sm outline-none">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-gray-400"></i>
+                    <div onclick="toggleSearch()" class="cursor-pointer relative group">
+                        <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                    </div>
+                    
+                    <!-- Wishlist -->
+                    <div class="cursor-pointer relative">
+                        <i class="fa-solid fa-heart text-xl"></i>
+                        <span class="absolute -top-1 -right-1 text-[10px] bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center">3</span>
+                    </div>
+                    
+                    <!-- Cart -->
+                    <div onclick="showCart()" class="cursor-pointer relative flex items-center gap-1">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span id="cart-count" class="cart-count absolute -top-1 -right-1 bg-[#0074d9] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow">0</span>
                     </div>
 
-                    <!-- Icons -->
-                    <button onclick="toggleCart()" class="relative p-2 hover:bg-gray-100 rounded-2xl">
-                        <i class="fa-solid fa-shopping-cart text-xl text-gray-700"></i>
-                        <span id="cart-count" class="absolute -top-1 -right-1 bg-[#e30613] text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
-                    </button>
-                    
-                    <button onclick="showLogin()" class="flex items-center gap-x-2 bg-white border border-[#e30613] hover:bg-[#e30613] hover:text-white text-[#e30613] px-5 py-2 rounded-3xl text-sm font-semibold">
-                        <i class="fa-solid fa-user"></i>
-                        <span>Đăng nhập</span>
-                    </button>
+                    <!-- User -->
+                    <div class="flex items-center gap-2 cursor-pointer" onclick="toggleUserMenu()">
+                        <div class="w-8 h-8 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center">
+                            👤
+                        </div>
+                        <div class="hidden md:block">
+                            <span class="text-sm font-medium">Tumay</span>
+                        </div>
+                    </div>
 
                     <!-- Mobile menu button -->
-                    <button onclick="toggleMobileMenu()" class="md:hidden p-3 text-2xl text-gray-700">
-                        <i id="mobile-icon" class="fa-solid fa-bars"></i>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-2xl">
+                        <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
             </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t px-6 py-4">
-            <div class="flex flex-col gap-y-4 text-sm font-medium">
-                <a href="#" onclick="navigateToSection('home');toggleMobileMenu()" class="py-2">Trang chủ</a>
-                <a href="#" onclick="navigateToSection('san-pham');toggleMobileMenu()" class="py-2">Sản phẩm</a>
-                <a href="#" onclick="navigateToSection('tinh-nang');toggleMobileMenu()" class="py-2">Tính năng</a>
-                <a href="#" onclick="navigateToSection('he-sinh-thai');toggleMobileMenu()" class="py-2">Hệ sinh thái</a>
-                <a href="#" onclick="navigateToSection('cong-dong');toggleMobileMenu()" class="py-2">Cộng đồng</a>
-                <a href="#" onclick="navigateToSection('bao-hanh');toggleMobileMenu()" class="py-2">Bảo hành điện tử</a>
-                <div class="pt-4 border-t flex justify-between">
-                    <button onclick="showLogin();toggleMobileMenu()" class="flex-1 bg-[#e30613] text-white py-3 rounded-3xl font-semibold">Đăng nhập / Đăng ký</button>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-[#001f3f] py-4 border-t border-white/10">
+                <div class="flex flex-col gap-4 px-6 text-sm font-medium">
+                    <a href="#" onclick="navigateToSection('home');toggleMobileMenu()" class="py-2">Trang chủ</a>
+                    <a href="#" onclick="navigateToSection('products');toggleMobileMenu()" class="py-2">Sản phẩm</a>
+                    <a href="#" onclick="navigateToSection('services');toggleMobileMenu()" class="py-2">Dịch vụ</a>
+                    <a href="#" onclick="navigateToSection('about');toggleMobileMenu()" class="py-2">Về IMEX</a>
+                    <a href="#" onclick="navigateToSection('blog');toggleMobileMenu()" class="py-2">Blog &amp; Tin tức</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <header id="home" class="hero-bg text-white">
-        <div class="max-w-7xl mx-auto px-6 pt-16 pb-20 grid md:grid-cols-2 gap-12 items-center">
+    <section id="home" class="hero-bg text-white pt-16 pb-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
-                <div class="inline-flex items-center bg-white/20 backdrop-blur-md text-white text-sm font-medium px-5 py-2 rounded-3xl">
-                    <i class="fa-solid fa-rocket mr-2"></i>
-                    NỀN TẢNG THƯƠNG MẠI ĐIỆN TỬ CHUYÊN BIỆT THIẾT BỊ DI ĐỘNG
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-3xl text-sm">
+                    <span class="bg-[#0074d9] text-white px-3 py-1 rounded-3xl text-xs font-semibold">MỚI 2026</span>
+                    <span class="font-medium">Flagship Series ra mắt</span>
                 </div>
                 
-                <h1 class="text-5xl md:text-6xl font-bold leading-none tracking-[-2px]">
-                    IMEX<br>Thiết bị di động<br><span class="text-white/90">Mua sắm thông minh – Kết nối toàn diện</span>
+                <h1 class="text-6xl md:text-7xl font-bold leading-none tracking-tighter">
+                    Thiết bị di động<br>chính hãng - Giá tốt nhất
                 </h1>
                 
-                <p class="text-xl text-white/90 max-w-md">
-                    Cầu nối giữa nhà sản xuất, nhà phân phối và người tiêu dùng. 
-                    Tìm kiếm – So sánh – Mua hàng – Bảo hành – Hỗ trợ chỉ trong 1 nền tảng.
+                <p class="text-xl text-white/80 max-w-md">
+                    Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động.<br>
+                    Hơn 10.000 sản phẩm • Giao hàng trong 2 giờ • Bảo hành chính hãng 24 tháng
                 </p>
                 
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="exploreNow()" 
-                            class="bg-white text-[#e30613] hover:bg-yellow-300 font-semibold px-8 py-4 rounded-3xl text-lg flex items-center gap-x-3 shadow-xl">
-                        <span>Khám phá ngay</span>
+                <div class="flex items-center gap-4">
+                    <button onclick="shopNow()" 
+                            class="bg-white text-[#001f3f] font-semibold px-10 py-4 rounded-3xl flex items-center gap-3 hover:shadow-2xl hover:scale-105 transition-all">
+                        <span>MUA NGAY</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
                     
                     <button onclick="watchVideo()" 
-                            class="border-2 border-white hover:bg-white hover:text-[#e30613] font-semibold px-8 py-4 rounded-3xl text-lg flex items-center gap-x-3">
+                            class="border border-white/70 hover:border-white font-medium px-8 py-4 rounded-3xl flex items-center gap-3">
                         <i class="fa-solid fa-play"></i>
-                        <span>Xem video giới thiệu</span>
+                        <span>Xem video</span>
                     </button>
                 </div>
                 
-                <div class="flex items-center gap-x-8 text-sm">
-                    <div class="flex items-center">
-                        <div class="flex -space-x-4">
-                            <div class="w-6 h-6 bg-white rounded-2xl flex items-center justify-center text-xs">📱</div>
-                            <div class="w-6 h-6 bg-white rounded-2xl flex items-center justify-center text-xs">💻</div>
+                <div class="flex items-center gap-8 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-2xl text-[#0074d9]"></i>
+                        <div>
+                            <div class="font-semibold">Bảo hành 24 tháng</div>
+                            <div class="text-white/70">Chính hãng</div>
                         </div>
-                        <span class="ml-3">+50.000 sản phẩm</span>
                     </div>
-                    <div>⭐ 4.98/5 từ 28.451 đánh giá</div>
-                    <div class="flex items-center gap-x-1">
-                        <i class="fa-solid fa-truck text-yellow-300"></i>
-                        <span>Giao hàng toàn quốc trong 24h</span>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-truck-fast text-2xl text-[#0074d9]"></i>
+                        <div>
+                            <div class="font-semibold">Giao hàng siêu tốc</div>
+                            <div class="text-white/70">2 giờ tại TP.HCM &amp; Hà Nội</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-left text-2xl text-[#0074d9]"></i>
+                        <div>
+                            <div class="font-semibold">Đổi trả 30 ngày</div>
+                            <div class="text-white/70">Không lý do</div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Hero visual -->
+            <!-- Hero Image -->
             <div class="relative flex justify-center">
-                <div class="relative">
-                    <!-- Floating phones -->
-                    <div class="phone-float absolute -left-6 top-8 bg-white rounded-3xl shadow-2xl p-3 w-36 rotate-[-12deg]">
-                        <div class="bg-black rounded-2xl p-1">
-                            <div class="bg-gradient-to-br from-blue-400 to-purple-500 h-64 rounded-2xl flex items-center justify-center text-white text-4xl">iPhone 16</div>
-                        </div>
-                        <div class="text-center text-xs font-bold text-[#e30613] mt-2">16 Pro Max • 256GB</div>
+                <div class="bg-white/10 backdrop-blur-3xl rounded-[4rem] p-8 shadow-2xl">
+                    <img src="https://picsum.photos/id/1015/800/800" 
+                         alt="iPhone 16 Pro Max Titan Black"
+                         class="w-[420px] h-[420px] object-contain drop-shadow-2xl rotate-12 hover:rotate-0 transition-transform duration-700">
+                </div>
+                <!-- Floating badges -->
+                <div class="absolute -top-6 -right-6 bg-white text-[#001f3f] px-6 py-3 rounded-3xl shadow-xl flex items-center gap-3 font-semibold">
+                    <span class="text-3xl">⭐</span>
+                    <div>
+                        <div>4.98/5</div>
+                        <div class="text-xs text-gray-500">Từ 12.458 đánh giá</div>
                     </div>
-                    
-                    <div class="phone-float absolute -right-8 bottom-12 bg-white rounded-3xl shadow-2xl p-3 w-36 rotate-[12deg]">
-                        <div class="bg-black rounded-2xl p-1">
-                            <div class="bg-gradient-to-br from-emerald-400 to-teal-500 h-64 rounded-2xl flex items-center justify-center text-white text-4xl">Galaxy S25</div>
+                </div>
+                <div class="absolute -bottom-4 -left-6 bg-[#0074d9] text-white px-5 py-2 rounded-3xl text-sm font-semibold shadow-xl flex items-center">
+                    <i class="fa-solid fa-fire mr-2"></i>
+                    BÁN CHẠY NHẤT
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+            <a onclick="filterCategory('phone')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-mobile-screen-button text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Điện thoại</span>
+            </a>
+            <a onclick="filterCategory('tablet')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-tablet-screen-button text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Máy tính bảng</span>
+            </a>
+            <a onclick="filterCategory('watch')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-watch text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Đồng hồ thông minh</span>
+            </a>
+            <a onclick="filterCategory('earbud')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-headphones text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Tai nghe</span>
+            </a>
+            <a onclick="filterCategory('accessory')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-charging-station text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Phụ kiện</span>
+            </a>
+            <a onclick="filterCategory('refurbished')" class="category-card flex flex-col items-center justify-center bg-white border border-gray-100 hover:border-[#0074d9] rounded-3xl py-8 transition-all hover:shadow-md">
+                <i class="fa-solid fa-recycle text-4xl text-[#001f3f] mb-4"></i>
+                <span class="font-semibold">Hàng tân trang</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="max-w-7xl mx-auto px-6 py-16 bg-gray-50">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <span class="px-4 py-1 bg-[#0074d9] text-white text-sm font-semibold rounded-3xl">HOT</span>
+                <h2 class="section-header text-4xl font-semibold mt-3">Sản phẩm nổi bật</h2>
+            </div>
+            <a href="#" onclick="viewAllProducts()" class="flex items-center gap-2 text-[#0074d9] font-medium hover:gap-4 transition-all">
+                Xem tất cả <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Products populated by JS -->
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="section-header text-4xl font-semibold text-center mb-12">Dịch vụ tiện ích độc quyền IMEX</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white border border-gray-100 p-8 rounded-3xl hover:border-[#0074d9] transition-all">
+                <i class="fa-solid fa-screwdriver-wrench text-5xl text-[#001f3f] mb-6"></i>
+                <h3 class="text-2xl font-semibold mb-2">Sửa chữa nhanh 30 phút</h3>
+                <p class="text-gray-600">Đội ngũ kỹ thuật viên chuyên nghiệp, linh kiện chính hãng. Bảo hành sửa chữa 6 tháng.</p>
+                <div class="mt-8 text-[#0074d9] font-medium">Đặt lịch ngay →</div>
+            </div>
+            
+            <div class="bg-white border border-gray-100 p-8 rounded-3xl hover:border-[#0074d9] transition-all">
+                <i class="fa-solid fa-mobile-retro text-5xl text-[#001f3f] mb-6"></i>
+                <h3 class="text-2xl font-semibold mb-2">Trade-in - Thu cũ đổi mới</h3>
+                <p class="text-gray-600">Đánh giá máy cũ trong 60 giây. Trợ giá lên đến 40% cho máy mới.</p>
+                <div class="mt-8 text-[#0074d9] font-medium">Kiểm tra máy cũ →</div>
+            </div>
+            
+            <div class="bg-white border border-gray-100 p-8 rounded-3xl hover:border-[#0074d9] transition-all">
+                <i class="fa-solid fa-credit-card text-5xl text-[#001f3f] mb-6"></i>
+                <h3 class="text-2xl font-semibold mb-2">Trả góp 0% lãi suất</h3>
+                <p class="text-gray-600">Lên đến 24 tháng. Duyệt hồ sơ chỉ trong 5 phút. Không cần chứng minh thu nhập.</p>
+                <div class="mt-8 text-[#0074d9] font-medium">Tính toán trả góp →</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="bg-[#001f3f] text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <div class="md:col-span-5">
+                    <h2 class="text-5xl font-semibold mb-6 leading-none">IMEX - Nền tảng<br>Thương mại điện tử<br>chuyên biệt Thiết bị di động</h2>
+                    <p class="text-white/70 text-lg leading-relaxed">
+                        Được xây dựng với sứ mệnh mang đến trải nghiệm mua sắm thiết bị di động hiện đại nhất Việt Nam. 
+                        Chúng tôi tập trung 100% vào smartphone, tablet, smartwatch và phụ kiện, đảm bảo chính hãng 100%, 
+                        giá cạnh tranh và dịch vụ vượt trội.
+                    </p>
+                    <div class="flex gap-8 mt-12">
+                        <div>
+                            <div class="text-6xl font-bold text-[#0074d9]">128k+</div>
+                            <div class="text-white/70">Khách hàng đã tin dùng</div>
                         </div>
-                        <div class="text-center text-xs font-bold text-[#e30613] mt-2">Ultra • 512GB</div>
+                        <div>
+                            <div class="text-6xl font-bold text-[#0074d9]">12.4k</div>
+                            <div class="text-white/70">Sản phẩm đang bán</div>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-bold text-[#0074d9]">98%</div>
+                            <div class="text-white/70">Đánh giá 5 sao</div>
+                        </div>
                     </div>
-                    
-                    <!-- Center main phone -->
-                    <div class="relative z-10 bg-white rounded-[3rem] shadow-2xl p-4 w-80 mx-auto">
-                        <div class="bg-black rounded-3xl overflow-hidden">
-                            <div class="h-96 bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 flex flex-col items-center justify-center text-white">
-                                <div class="text-7xl mb-4">📱</div>
-                                <div class="text-center">
-                                    <div class="text-2xl font-bold">IMEX Store</div>
-                                    <div class="text-sm opacity-75">Thiết bị di động chính hãng</div>
+                </div>
+                
+                <div class="md:col-span-7 bg-white/10 rounded-3xl p-8 backdrop-blur-3xl">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-b border-white/30 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-3xl">🇻🇳</span>
+                                    <div>
+                                        <div class="font-medium">Kho hàng tại 3 thành phố</div>
+                                        <div class="text-sm text-white/60">Hà Nội - TP.HCM - Đà Nẵng</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-warehouse text-3xl"></i>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-white/30 pb-4">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-3xl">🔒</span>
+                                    <div>
+                                        <div class="font-medium">Bảo mật thanh toán</div>
+                                        <div class="text-sm text-white/60">Mã hóa SSL 256-bit</div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-lock text-3xl"></i>
+                            </div>
+                        </div>
+                        <div class="rounded-3xl bg-gradient-to-br from-[#0074d9] to-[#001f3f] p-8 text-center flex flex-col justify-center">
+                            <i class="fa-solid fa-medal text-7xl mb-6"></i>
+                            <div class="text-2xl font-semibold">Top 1 nền tảng</div>
+                            <div class="text-xl opacity-90">Thiết bị di động 2025 - 2026</div>
+                            <div class="text-xs mt-6 opacity-70">Theo VietnamWorks &amp; Nielsen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS & BLOG TEASER -->
+    <section id="blog" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex flex-col lg:flex-row gap-16">
+            <!-- Testimonials -->
+            <div class="lg:w-5/12">
+                <h2 class="text-4xl font-semibold mb-10">Khách hàng nói gì về IMEX?</h2>
+                <div class="space-y-8">
+                    <div class="bg-white p-6 rounded-3xl border">
+                        <div class="flex gap-4">
+                            <div class="text-5xl">“</div>
+                            <div>
+                                <p class="italic">"Mua iPhone 16 Pro ở đây nhanh hơn cả Apple Store. Giao trong 1 giờ, máy mới 100%. Rất hài lòng!"</p>
+                                <div class="mt-6 flex items-center gap-3">
+                                    <div class="w-9 h-9 bg-gray-200 rounded-2xl"></div>
+                                    <div>
+                                        <div class="font-semibold">Nguyễn Văn A</div>
+                                        <div class="text-sm text-gray-500">Hà Nội • 3 ngày trước</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-
-    <!-- TRUST BAR -->
-    <div class="bg-white py-4 border-b">
-        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-x-8 gap-y-3 text-sm text-gray-500">
-            <div class="flex items-center gap-x-2"><i class="fa-solid fa-shield-halved text-[#e30613]"></i> Bảo hành chính hãng 24 tháng</div>
-            <div class="flex items-center gap-x-2"><i class="fa-solid fa-truck-fast text-[#e30613]"></i> Giao hàng miễn phí từ 5 triệu</div>
-            <div class="flex items-center gap-x-2"><i class="fa-solid fa-headset text-[#e30613]"></i> Hỗ trợ 24/7 qua chat &amp; hotline</div>
-            <div class="flex items-center gap-x-2"><i class="fa-solid fa-rotate-left text-[#e30613]"></i> Đổi trả trong 30 ngày</div>
-            <div class="flex items-center gap-x-2"><i class="fa-solid fa-lock text-[#e30613]"></i> Thanh toán an toàn 100%</div>
-        </div>
-    </div>
-
-    <!-- TỔNG QUAN DỰ ÁN -->
-    <section class="max-w-7xl mx-auto px-6 py-20">
-        <div class="text-center mb-12">
-            <span class="px-4 py-1 bg-red-100 text-[#e30613] text-sm font-semibold rounded-3xl">1. TỔNG QUAN DỰ ÁN</span>
-            <h2 class="section-title text-4xl font-bold mt-3">IMEX – Cầu nối hoàn hảo cho thế giới di động</h2>
-        </div>
-        
-        <div class="grid md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-7">
-                <p class="text-lg text-gray-700 leading-relaxed">
-                    Nền tảng đóng vai trò là cầu nối giữa các nhà cung cấp, doanh nghiệp và người tiêu dùng, giúp quá trình tìm kiếm, giao dịch, thanh toán và giao nhận sản phẩm được thực hiện một cách nhanh chóng, thuận tiện và an toàn. 
-                    Hệ thống còn tích hợp nhiều dịch vụ hỗ trợ như tư vấn, bảo hành và chăm sóc khách hàng, góp phần nâng cao trải nghiệm người dùng và thúc đẩy sự phát triển của thị trường thương mại điện tử trong lĩnh vực thiết bị di động.
-                </p>
-                <div class="mt-8 flex items-center gap-x-6">
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#e30613]">1.2M+</div>
-                        <div class="text-sm text-gray-500">Người dùng hoạt động</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#e30613]">8.500+</div>
-                        <div class="text-sm text-gray-500">Cửa hàng &amp; đối tác</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-[#e30613]">320.000+</div>
-                        <div class="text-sm text-gray-500">Đơn hàng/tháng</div>
-                    </div>
-                </div>
-            </div>
             
-            <div class="md:col-span-5 bg-gray-50 rounded-3xl p-8 border border-gray-100">
-                <h3 class="font-semibold mb-4 flex items-center gap-x-2 text-[#e30613]"><i class="fa-solid fa-circle-nodes"></i> Hệ sinh thái IMEX</h3>
-                <ul class="space-y-4 text-gray-700">
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">🏭</span> Nhà sản xuất thiết bị</li>
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">🚚</span> Nhà phân phối ủy quyền</li>
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">🛒</span> Các nhà bán lẻ thiết bị</li>
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">📦</span> Đơn vị logistics</li>
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">🔧</span> Trung tâm sửa chữa và bảo hành</li>
-                    <li class="flex items-center gap-x-3"><span class="text-2xl">👤</span> Người tiêu dùng cuối cùng</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- SẢN PHẨM NỔI BẬT -->
-    <section id="san-pham" class="bg-gray-50 py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-12">
-                <div>
-                    <span class="text-[#e30613] font-semibold">SẢN PHẨM HOT</span>
-                    <h2 class="text-4xl font-bold">Thiết bị di động mới nhất</h2>
+            <!-- Blog -->
+            <div class="lg:w-7/12">
+                <div class="flex justify-between mb-8">
+                    <h2 class="text-4xl font-semibold">Cập nhật công nghệ</h2>
+                    <a href="#" class="text-[#0074d9] flex items-center">Đọc thêm <i class="fa-solid fa-arrow-right ml-2"></i></a>
                 </div>
-                <a href="#" onclick="viewAllProducts()" class="text-[#e30613] flex items-center gap-x-2 font-medium">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <!-- Product Card 1 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-slate-900 to-black flex items-center justify-center text-7xl">📱</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-green-100 text-green-700 w-fit px-3 py-px rounded-full">iOS 18</div>
-                        <h4 class="font-semibold mt-2">iPhone 16 Pro Max 256GB</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="line-through text-xs text-gray-400">32.990.000 ₫</span>
-                                <span class="text-2xl font-bold text-[#e30613]">29.990.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden">
+                        <img src="https://picsum.photos/id/201/600/300" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="text-xs text-[#0074d9] font-medium">iOS 19 • 15/04/2026</div>
+                            <h4 class="font-semibold text-xl mt-2">iPhone 17 Air sẽ mỏng nhất lịch sử - Có gì mới?</h4>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Product Card 2 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-7xl">📱</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-blue-100 text-blue-700 w-fit px-3 py-px rounded-full">Android 15</div>
-                        <h4 class="font-semibold mt-2">Samsung Galaxy S25 Ultra</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="line-through text-xs text-gray-400">34.990.000 ₫</span>
-                                <span class="text-2xl font-bold text-[#e30613]">31.490.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
+                    <div class="bg-white border border-gray-100 rounded-3xl overflow-hidden">
+                        <img src="https://picsum.photos/id/251/600/300" class="w-full h-40 object-cover">
+                        <div class="p-6">
+                            <div class="text-xs text-[#0074d9] font-medium">Galaxy AI • 14/04/2026</div>
+                            <h4 class="font-semibold text-xl mt-2">Samsung Galaxy S26 Ultra: Camera 200MP &amp; AI siêu thông minh</h4>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Product Card 3 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-purple-600 to-violet-500 flex items-center justify-center text-7xl">📱</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-purple-100 text-purple-700 w-fit px-3 py-px rounded-full">5G</div>
-                        <h4 class="font-semibold mt-2">Xiaomi 14T Pro 12/512GB</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="text-2xl font-bold text-[#e30613]">15.990.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Card 4 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-7xl">📱</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-red-100 text-red-700 w-fit px-3 py-px rounded-full">Pin 7000mAh</div>
-                        <h4 class="font-semibold mt-2">OPPO Reno12 5G</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="text-2xl font-bold text-[#e30613]">12.490.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Card 5 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-7xl">💻</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-emerald-100 text-emerald-700 w-fit px-3 py-px rounded-full">Tablet</div>
-                        <h4 class="font-semibold mt-2">iPad Air M3 11 inch</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="line-through text-xs text-gray-400">19.990.000 ₫</span>
-                                <span class="text-2xl font-bold text-[#e30613]">17.990.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product Card 6 -->
-                <div class="bg-white rounded-3xl overflow-hidden border card-hover">
-                    <div class="h-48 bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center text-7xl">⌚</div>
-                    <div class="p-4">
-                        <div class="text-xs bg-amber-100 text-amber-700 w-fit px-3 py-px rounded-full">Smartwatch</div>
-                        <h4 class="font-semibold mt-2">Apple Watch Ultra 2</h4>
-                        <div class="flex justify-between items-baseline mt-4">
-                            <div>
-                                <span class="text-2xl font-bold text-[#e30613]">21.990.000 ₫</span>
-                            </div>
-                            <button onclick="addToCart(this)" class="bg-[#e30613] text-white px-5 py-2 rounded-2xl text-sm">Mua ngay</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TÍNH NĂNG CHÍNH -->
-    <section id="tinh-nang" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="text-center mb-12">
-            <span class="px-4 py-1 bg-red-100 text-[#e30613] text-sm font-semibold rounded-3xl">1.2. CÁC TÍNH NĂNG CHÍNH</span>
-            <h2 class="section-title text-4xl font-bold mt-3">Hệ sinh thái thương mại điện tử toàn diện</h2>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">📦</div>
-                <h3 class="text-2xl font-semibold mb-2">Quản lý sản phẩm</h3>
-                <p class="text-gray-600">Hiển thị thông tin chi tiết thiết bị di động, thông số kỹ thuật, hình ảnh, giá bán và đánh giá người dùng.</p>
-                <div class="mt-8 text-[#e30613] font-medium flex items-center">Khám phá ngay <i class="fa-solid fa-arrow-right ml-2"></i></div>
-            </div>
-            
-            <!-- Feature 2 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">⚖️</div>
-                <h3 class="text-2xl font-semibold mb-2">Hệ thống đối chiếu thông số</h3>
-                <p class="text-gray-600">So sánh nhiều thiết bị theo cấu hình, hiệu năng, pin, camera, giá bán… giúp bạn chọn được sản phẩm phù hợp nhất.</p>
-                <div onclick="openCompareModal()" class="mt-8 text-[#e30613] font-medium flex items-center cursor-pointer">Bắt đầu so sánh <i class="fa-solid fa-arrow-right ml-2"></i></div>
-            </div>
-            
-            <!-- Feature 3 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">🛒</div>
-                <h3 class="text-2xl font-semibold mb-2">Giao dịch &amp; Thanh toán trực tuyến</h3>
-                <p class="text-gray-600">Giỏ hàng, đặt hàng, thanh toán điện tử, quản lý đơn hàng và theo dõi giao hàng thời gian thực.</p>
-                <div class="mt-8 text-[#e30613] font-medium flex items-center">Mua sắm ngay <i class="fa-solid fa-arrow-right ml-2"></i></div>
-            </div>
-            
-            <!-- Feature 4 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">🔐</div>
-                <h3 class="text-2xl font-semibold mb-2">Bảo hành điện tử</h3>
-                <p class="text-gray-600">Lưu trữ và quản lý thông tin bảo hành trên hệ thống. Tra cứu nhanh, sử dụng dịch vụ hỗ trợ chỉ với 1 click.</p>
-                <div onclick="navigateToSection('bao-hanh')" class="mt-8 text-[#e30613] font-medium flex items-center cursor-pointer">Kiểm tra bảo hành <i class="fa-solid fa-arrow-right ml-2"></i></div>
-            </div>
-            
-            <!-- Feature 5 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">👥</div>
-                <h3 class="text-2xl font-semibold mb-2">Cộng đồng người dùng công nghệ</h3>
-                <p class="text-gray-600">Chia sẻ đánh giá, kinh nghiệm sử dụng, hỏi đáp và kết nối với hàng ngàn tín đồ công nghệ.</p>
-                <div onclick="navigateToSection('cong-dong')" class="mt-8 text-[#e30613] font-medium flex items-center cursor-pointer">Tham gia ngay <i class="fa-solid fa-arrow-right ml-2"></i></div>
-            </div>
-            
-            <!-- Feature 6 -->
-            <div class="bg-white border rounded-3xl p-8 card-hover flex flex-col">
-                <div class="w-14 h-14 flex items-center justify-center bg-red-100 text-[#e30613] rounded-2xl text-4xl mb-6">📍</div>
-                <h3 class="text-2xl font-semibold mb-2">Tư vấn &amp; Hỗ trợ cá nhân hóa</h3>
-                <p class="text-gray-600 flex-1">AI gợi ý sản phẩm phù hợp với nhu cầu, ngân sách và phong cách sử dụng của bạn.</p>
-                <button onclick="talkToAI()" class="mt-auto border border-[#e30613] text-[#e30613] hover:bg-[#e30613] hover:text-white py-3 rounded-3xl font-semibold flex justify-center items-center gap-x-2">
-                    <i class="fa-solid fa-robot"></i> Nói chuyện với IMEX AI
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- SO SÁNH THÔNG SỐ (Demo Modal Trigger) -->
-    <div onclick="openCompareModal()" class="max-w-7xl mx-auto px-6 py-12 bg-gradient-to-r from-red-50 to-white border-y flex flex-col md:flex-row items-center justify-between cursor-pointer hover:from-red-100">
-        <div class="flex items-center gap-x-6">
-            <i class="fa-solid fa-chart-simple text-5xl text-[#e30613]"></i>
-            <div>
-                <span class="uppercase tracking-widest text-xs font-bold text-[#e30613]">Công cụ độc quyền</span>
-                <h3 class="text-3xl font-bold">So sánh thông số kỹ thuật nhanh chóng</h3>
-            </div>
-        </div>
-        <div class="text-[#e30613] text-2xl font-semibold flex items-center mt-6 md:mt-0">
-            Thử ngay <i class="fa-solid fa-arrow-right ml-4"></i>
-        </div>
-    </div>
-
-    <!-- HỆ SINH THÁI -->
-    <section id="he-sinh-thai" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="text-center mb-12">
-            <h2 class="section-title text-4xl font-bold">Hệ sinh thái IMEX kết nối toàn chuỗi giá trị</h2>
-        </div>
-        <div class="flex flex-wrap justify-center gap-6">
-            <div class="bg-white shadow-sm px-8 py-6 rounded-3xl flex items-center gap-x-4 w-64 text-center border border-transparent hover:border-[#e30613]">
-                <span class="text-5xl">🏭</span>
-                <div class="text-left">
-                    <strong>Nhà sản xuất</strong>
-                    <div class="text-xs text-gray-500">Apple • Samsung • Xiaomi • Oppo</div>
-                </div>
-            </div>
-            <div class="bg-white shadow-sm px-8 py-6 rounded-3xl flex items-center gap-x-4 w-64 text-center border border-transparent hover:border-[#e30613]">
-                <span class="text-5xl">📦</span>
-                <div class="text-left">
-                    <strong>Nhà phân phối</strong>
-                    <div class="text-xs text-gray-500">FPT Shop • The Gioi Di Dong • CellphoneS</div>
-                </div>
-            </div>
-            <div class="bg-white shadow-sm px-8 py-6 rounded-3xl flex items-center gap-x-4 w-64 text-center border border-transparent hover:border-[#e30613]">
-                <span class="text-5xl">🛍️</span>
-                <div class="text-left">
-                    <strong>Nhà bán lẻ</strong>
-                    <div class="text-xs text-gray-500">Hơn 2.800 cửa hàng trên toàn quốc</div>
-                </div>
-            </div>
-            <div class="bg-white shadow-sm px-8 py-6 rounded-3xl flex items-center gap-x-4 w-64 text-center border border-transparent hover:border-[#e30613]">
-                <span class="text-5xl">🚚</span>
-                <div class="text-left">
-                    <strong>Logistics</strong>
-                    <div class="text-xs text-gray-500">GHN • GHTK • Viettel Post</div>
-                </div>
-            </div>
-            <div class="bg-white shadow-sm px-8 py-6 rounded-3xl flex items-center gap-x-4 w-64 text-center border border-transparent hover:border-[#e30613]">
-                <span class="text-5xl">🔧</span>
-                <div class="text-left">
-                    <strong>Bảo hành &amp; Sửa chữa</strong>
-                    <div class="text-xs text-gray-500">Hơn 450 trung tâm ủy quyền</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CỘNG ĐỒNG -->
-    <section id="cong-dong" class="bg-[#e30613] text-white py-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-4xl font-bold mb-6">Cộng đồng IMEX – Nơi tín đồ công nghệ gặp gỡ</h2>
-                    <p class="text-white/90 text-lg">Chia sẻ đánh giá thực tế, kinh nghiệm sử dụng, hỏi đáp chuyên sâu và cùng nhau khám phá những sản phẩm di động mới nhất.</p>
-                    <div class="mt-10 flex gap-4">
-                        <button onclick="joinCommunity()" class="bg-white text-[#e30613] px-10 py-4 rounded-3xl font-semibold flex-1 md:flex-none">Tham gia cộng đồng miễn phí</button>
-                        <button onclick="navigateToSection('tinh-nang')" class="border border-white px-10 py-4 rounded-3xl flex-1 md:flex-none">Xem bài viết nổi bật</button>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 text-sm">
-                        “Mình mua iPhone 16 qua IMEX, giao hàng siêu nhanh và bảo hành điện tử rất tiện!”<br>
-                        <span class="block mt-4 text-xs opacity-75">@techvinh123</span>
-                    </div>
-                    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 text-sm">
-                        “Công cụ so sánh thông số giúp mình chọn được Galaxy S25 Ultra đúng nhu cầu trong 2 phút.”<br>
-                        <span class="block mt-4 text-xs opacity-75">@gadgetlover</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BẢO HÀNH -->
-    <section id="bao-hanh" class="max-w-7xl mx-auto px-6 py-20">
-        <div class="rounded-3xl bg-gradient-to-r from-[#e30613] to-red-700 text-white p-12 md:p-16 flex flex-col md:flex-row items-center gap-12">
-            <div class="flex-1">
-                <h2 class="text-4xl font-bold">Bảo hành điện tử – Chỉ 1 click là kiểm tra được</h2>
-                <p class="mt-4 text-white/90">Nhập IMEI hoặc số serial → Xem ngay thời hạn bảo hành, lịch sử sửa chữa và đặt lịch hỗ trợ.</p>
-                <div class="mt-8 flex gap-x-3">
-                    <input type="text" id="imei-input" placeholder="Nhập IMEI / Serial number" class="flex-1 bg-white/20 placeholder:text-white/60 text-white border border-white/30 rounded-3xl px-6 py-4 outline-none">
-                    <button onclick="checkWarranty()" class="bg-white text-[#e30613] px-10 font-semibold rounded-3xl">Kiểm tra</button>
-                </div>
-            </div>
-            <div class="flex-1 text-center">
-                <div class="inline-flex flex-col items-center bg-white/10 backdrop-blur-md rounded-3xl px-12 py-8">
-                    <i class="fa-solid fa-qrcode text-8xl mb-4"></i>
-                    <p class="text-xl font-medium">Hoặc quét mã QR trên hộp sản phẩm</p>
-                    <div class="mt-6 text-xs opacity-70">Đã hỗ trợ 128.459 thiết bị • Cập nhật realtime</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-white">
+    <footer class="bg-[#001f3f] text-white">
         <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-y-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-y-12">
                 <div>
-                    <div class="flex items-center gap-x-3 mb-6">
-                        <div class="w-9 h-9 bg-white rounded-2xl flex items-center justify-center text-[#e30613] text-3xl">📱</div>
-                        <h1 class="text-3xl font-bold">IMEX</h1>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-[#001f3f] text-3xl">📱</div>
+                        <span class="text-3xl font-bold">IMEX</span>
                     </div>
-                    <p class="text-sm text-gray-400">Nền tảng thương mại điện tử chuyên biệt thiết bị di động hàng đầu Việt Nam.</p>
-                    <div class="mt-6 flex gap-x-4 text-2xl">
-                        <i class="fa-brands fa-facebook"></i>
-                        <i class="fa-brands fa-youtube"></i>
-                        <i class="fa-brands fa-tiktok"></i>
-                        <i class="fa-brands fa-zalo"></i>
+                    <p class="text-white/70 text-sm leading-relaxed max-w-xs">
+                        Nền tảng Thương mại điện tử chuyên biệt cho Thiết bị di động hiện đại nhất Việt Nam.
+                    </p>
+                    <div class="flex gap-4 mt-8">
+                        <i class="fa-brands fa-facebook-f text-2xl cursor-pointer hover:text-[#0074d9]"></i>
+                        <i class="fa-brands fa-tiktok text-2xl cursor-pointer hover:text-[#0074d9]"></i>
+                        <i class="fa-brands fa-youtube text-2xl cursor-pointer hover:text-[#0074d9]"></i>
                     </div>
                 </div>
                 
                 <div>
-                    <strong class="text-sm block mb-4">Sản phẩm</strong>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Điện thoại</li>
+                    <h4 class="font-semibold mb-4">Sản phẩm</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li>Điện thoại thông minh</li>
                         <li>Máy tính bảng</li>
                         <li>Đồng hồ thông minh</li>
+                        <li>Tai nghe &amp; Âm thanh</li>
                         <li>Phụ kiện chính hãng</li>
                     </ul>
                 </div>
                 
                 <div>
-                    <strong class="text-sm block mb-4">Tính năng</strong>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>So sánh thông số</li>
-                        <li>Bảo hành điện tử</li>
-                        <li>Cộng đồng IMEX</li>
-                        <li>IMEX AI tư vấn</li>
+                    <h4 class="font-semibold mb-4">Dịch vụ</h4>
+                    <ul class="space-y-3 text-white/70 text-sm">
+                        <li>Thu cũ đổi mới</li>
+                        <li>Sửa chữa nhanh</li>
+                        <li>Trả góp 0%</li>
+                        <li>Bảo hành mở rộng</li>
+                        <li>Giao hàng 2 giờ</li>
                     </ul>
                 </div>
                 
                 <div>
-                    <strong class="text-sm block mb-4">Công ty</strong>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Về IMEX</li>
-                        <li>Tuyển dụng</li>
-                        <li>Blog công nghệ</li>
-                        <li>Liên hệ</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <strong class="text-sm block mb-4">Hỗ trợ</strong>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Hotline: 1900 68 68 68</li>
-                        <li>Chat trực tiếp</li>
-                        <li>Chính sách đổi trả</li>
-                        <li>Điều khoản dịch vụ</li>
-                    </ul>
-                    <div class="mt-8 bg-white/10 rounded-2xl p-4 text-xs">
-                        © 2026 IMEX Corporation. All Rights Reserved.<br>
-                        <span class="text-[#e30613]">Được xây dựng dựa trên tài liệu dự án</span>
+                    <h4 class="font-semibold mb-4">Liên hệ</h4>
+                    <p class="text-sm text-white/70">Hotline: 1900 88 66 88</p>
+                    <p class="text-sm text-white/70">Email: support@imex.vn</p>
+                    <p class="text-sm text-white/70 mt-6">Địa chỉ: 123 Đường Nguyễn Huệ, Quận 1, TP.HCM</p>
+                    
+                    <div class="mt-8 flex items-center gap-2 text-xs bg-white/10 rounded-3xl px-5 py-3">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Thanh toán an toàn với</span>
+                        <span class="font-mono font-bold">VNPAY</span> • 
+                        <span class="font-mono font-bold">MOMO</span> • 
+                        <span class="font-mono font-bold">ZALOPAY</span>
                     </div>
                 </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-16 pt-8 text-xs text-white/50 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>© 2026 IMEX Mobile. All rights reserved.</div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white">Điều khoản sử dụng</a>
+                    <a href="#" class="hover:text-white">Chính sách bảo mật</a>
+                    <a href="#" class="hover:text-white">Chính sách đổi trả</a>
+                </div>
+                <div class="text-[#0074d9]">Made with ❤️ for mobile lovers</div>
             </div>
         </div>
     </footer>
 
-    <!-- COMPARE MODAL -->
-    <div onclick="if(event.target.id === 'compare-modal')hideCompareModal()" id="compare-modal" class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-center justify-center">
-        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h3 class="font-bold text-2xl">So sánh thiết bị di động</h3>
-                <button onclick="hideCompareModal()" class="text-3xl text-gray-400">×</button>
+    <!-- SIMPLE CART MODAL -->
+    <div id="cart-modal" onclick="if(event.target.id === 'cart-modal') hideCart()" 
+         class="hidden fixed inset-0 bg-black/70 z-[9999] flex items-end md:items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="bg-white w-full max-w-lg rounded-t-3xl md:rounded-3xl shadow-2xl max-h-[90vh] overflow-hidden">
+            <div class="px-6 py-6 border-b flex items-center justify-between">
+                <h3 class="font-semibold text-2xl">Giỏ hàng của bạn</h3>
+                <i onclick="hideCart()" class="fa-solid fa-xmark text-3xl cursor-pointer"></i>
             </div>
-            <div class="p-6">
-                <p class="text-center text-gray-500 mb-6">Chọn tối đa 4 sản phẩm để so sánh thông số</p>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="border rounded-2xl p-4 text-center cursor-pointer hover:border-[#e30613]" onclick="selectProduct(this)">
-                        iPhone 16 Pro Max
-                    </div>
-                    <div class="border rounded-2xl p-4 text-center cursor-pointer hover:border-[#e30613]" onclick="selectProduct(this)">
-                        Galaxy S25 Ultra
-                    </div>
-                    <div class="border rounded-2xl p-4 text-center cursor-pointer hover:border-[#e30613]" onclick="selectProduct(this)">
-                        Xiaomi 14T Pro
-                    </div>
-                    <div class="border rounded-2xl p-4 text-center cursor-pointer hover:border-[#e30613]" onclick="selectProduct(this)">
-                        OPPO Reno12 Pro
-                    </div>
+            
+            <div id="cart-items" class="px-6 py-4 max-h-[420px] overflow-auto">
+                <!-- JS populated -->
+                <div class="text-center py-16 text-gray-400">
+                    <i class="fa-solid fa-cart-shopping text-6xl mb-6 opacity-30"></i>
+                    <p>Giỏ hàng trống</p>
                 </div>
-                <button onclick="simulateComparison()" class="mt-8 w-full py-4 bg-[#e30613] text-white rounded-3xl font-semibold">BẮT ĐẦU SO SÁNH NGAY</button>
             </div>
+            
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between text-lg font-semibold mb-6">
+                    <span>Tổng tiền:</span>
+                    <span id="cart-total" class="text-[#001f3f]">0 ₫</span>
+                </div>
+                <button onclick="checkout()" 
+                        class="w-full py-6 text-lg bg-[#001f3f] text-white rounded-3xl font-semibold">
+                    TIẾN HÀNH THANH TOÁN
+                </button>
+                <p class="text-center text-xs text-gray-400 mt-4">Hoặc thanh toán sau khi nhận hàng</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH OVERLAY -->
+    <div onclick="if(event.target.id === 'search-overlay') toggleSearch()" 
+         id="search-overlay" class="hidden fixed inset-0 bg-black/60 z-[11000] flex items-start justify-center pt-24">
+        <div onclick="event.stopImmediatePropagation()" class="w-full max-w-2xl bg-white rounded-3xl mx-4 shadow-2xl overflow-hidden">
+            <div class="p-6">
+                <div class="flex border-b pb-4">
+                    <input id="search-input" 
+                           onkeyup="if(event.keyCode===13) performSearch()"
+                           type="text" 
+                           placeholder="Tìm kiếm điện thoại, máy tính bảng, phụ kiện..." 
+                           class="flex-1 outline-none text-xl placeholder:text-gray-400">
+                    <button onclick="performSearch()" class="px-6 text-[#0074d9]">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="search-results" class="px-6 pb-6 text-sm max-h-96 overflow-auto"></div>
         </div>
     </div>
 
     <script>
         // Tailwind script initialization
         function initializeTailwind() {
-            return {
-                config(userConfig = {}) {
-                    return {
-                        configUser: userConfig,
-                        defaultTheme: {
-                            extend: {
-                                colors: {
-                                    primary: '#e30613'
-                                }
-                            }
-                        }
-                    }
-                },
-                theme(userConfig = {}) {
-                    return {
-                        ...this.defaultTheme,
-                        ...this.config(userConfig).theme
-                    }
+            tailwind.config = {
+                content: [],
+                theme: {
+                    extend: {}
                 }
             }
         }
         
-        // Main script
-        function init() {
-            initializeTailwind().theme()
+        // Mock products data
+        let products = [
+            {
+                id: 1,
+                name: "iPhone 16 Pro Max 256GB",
+                category: "phone",
+                price: 32990000,
+                originalPrice: 35990000,
+                image: "https://picsum.photos/id/1015/400/400",
+                badge: "BÁN CHẠY",
+                rating: 4.9
+            },
+            {
+                id: 2,
+                name: "Samsung Galaxy S25 Ultra 512GB",
+                category: "phone",
+                price: 28990000,
+                originalPrice: 31990000,
+                image: "https://picsum.photos/id/201/400/400",
+                badge: "MỚI",
+                rating: 5
+            },
+            {
+                id: 3,
+                name: "iPad Air M3 11 inch WiFi + 5G",
+                category: "tablet",
+                price: 18990000,
+                originalPrice: 19990000,
+                image: "https://picsum.photos/id/251/400/400",
+                badge: "",
+                rating: 4.8
+            },
+            {
+                id: 4,
+                name: "Apple Watch Ultra 2 Titanium",
+                category: "watch",
+                price: 19990000,
+                originalPrice: null,
+                image: "https://picsum.photos/id/1005/400/400",
+                badge: "GIẢM GIÁ",
+                rating: 4.9
+            },
+            {
+                id: 5,
+                name: "AirPods Pro 3 (2026)",
+                category: "earbud",
+                price: 6990000,
+                originalPrice: 7990000,
+                image: "https://picsum.photos/id/133/400/400",
+                badge: "",
+                rating: 4.7
+            },
+            {
+                id: 6,
+                name: "Xiaomi 14T Pro 12/512GB",
+                category: "phone",
+                price: 13990000,
+                originalPrice: 15990000,
+                image: "https://picsum.photos/id/160/400/400",
+                badge: "GIÁ TỐT",
+                rating: 4.6
+            },
+            {
+                id: 7,
+                name: "Samsung Galaxy Tab S10 Ultra",
+                category: "tablet",
+                price: 25990000,
+                originalPrice: null,
+                image: "https://picsum.photos/id/180/400/400",
+                badge: "",
+                rating: 5
+            },
+            {
+                id: 8,
+                name: "Sony WH-1000XM6",
+                category: "earbud",
+                price: 8990000,
+                originalPrice: 10990000,
+                image: "https://picsum.photos/id/201/400/400",
+                badge: "",
+                rating: 4.8
+            }
+        ]
+        
+        let cart = []
+        
+        // Render product grid
+        function renderProducts(filteredProducts = products) {
+            const container = document.getElementById('product-grid')
+            container.innerHTML = ''
             
-            // Fake live cart count
-            let count = 3
-            setInterval(() => {
-                count++
-                if (count > 9) count = 3
-                const el = document.getElementById('cart-count')
-                if (el) el.textContent = count
-            }, 8000)
+            filteredProducts.forEach(product => {
+                const discount = product.originalPrice 
+                    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) 
+                    : 0
+                
+                const cardHTML = `
+                <div class="product-card bg-white border border-gray-100 rounded-3xl overflow-hidden group">
+                    <div class="relative">
+                        <img src="${product.image}" alt="${product.name}" 
+                             class="w-full aspect-square object-contain bg-gray-50 p-6 group-hover:scale-110 transition-transform">
+                        
+                        ${product.badge ? `<div class="absolute top-4 left-4 bg-[#0074d9] text-white text-xs font-bold px-4 py-1 rounded-3xl">${product.badge}</div>` : ''}
+                        
+                        ${discount > 0 ? `
+                        <div class="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-3xl">
+                            -${discount}%
+                        </div>` : ''}
+                    </div>
+                    
+                    <div class="px-6 pb-6">
+                        <div class="text-sm text-gray-400 mb-1">${product.category === 'phone' ? 'Điện thoại' : product.category === 'tablet' ? 'Máy tính bảng' : 'Phụ kiện'}</div>
+                        <h4 class="font-semibold line-clamp-2 h-12">${product.name}</h4>
+                        
+                        <div class="flex justify-between items-end mt-4">
+                            <div>
+                                <span class="text-2xl font-bold text-[#001f3f]">${product.price.toLocaleString('vi-VN')} ₫</span>
+                                ${product.originalPrice ? `<span class="text-xs line-through text-gray-400 block">${product.originalPrice.toLocaleString('vi-VN')} ₫</span>` : ''}
+                            </div>
+                            
+                            <div class="flex items-center text-amber-400">
+                                ${Array(5).fill().map((_, i) => `<i class="fa-solid fa-star ${i < Math.floor(product.rating) ? 'text-amber-400' : 'text-gray-200'}"></i>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <button onclick="addToCart(${product.id}); event.stopImmediatePropagation()" 
+                                class="mt-6 w-full bg-[#001f3f] hover:bg-[#003366] text-white py-3.5 rounded-3xl text-sm font-semibold flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            THÊM VÀO GIỎ
+                        </button>
+                    </div>
+                </div>`
+                
+                container.innerHTML += cardHTML
+            })
             
-            console.log('%c✅ Trang web IMEX đã được khởi tạo thành công!', 'background:#e30613;color:#fff;padding:2px 6px;border-radius:4px')
+            if (filteredProducts.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-20 text-gray-400">Không tìm thấy sản phẩm nào phù hợp</div>`
+            }
         }
         
-        // Navigation
+        function addToCart(id) {
+            const product = products.find(p => p.id === id)
+            if (!product) return
+            
+            const existing = cart.find(item => item.id === id)
+            if (existing) {
+                existing.quantity = (existing.quantity || 1) + 1
+            } else {
+                cart.push({...product, quantity: 1})
+            }
+            
+            updateCartCount()
+            
+            // Toast
+            const toast = document.createElement('div')
+            toast.className = 'fixed bottom-8 right-8 bg-[#001f3f] text-white px-6 py-4 rounded-3xl shadow-2xl flex items-center gap-3'
+            toast.innerHTML = `✅ <span>${product.name} đã được thêm vào giỏ hàng</span>`
+            document.body.appendChild(toast)
+            
+            setTimeout(() => toast.remove(), 2800)
+        }
+        
+        function updateCartCount() {
+            const totalItems = cart.reduce((acc, item) => acc + (item.quantity || 1), 0)
+            document.getElementById('cart-count').textContent = totalItems
+        }
+        
+        function showCart() {
+            const modal = document.getElementById('cart-modal')
+            const container = document.getElementById('cart-items')
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                <div class="text-center py-16 text-gray-400">
+                    <i class="fa-solid fa-cart-shopping text-6xl mb-6 opacity-30"></i>
+                    <p class="text-lg">Giỏ hàng của bạn đang trống</p>
+                    <button onclick="hideCart()" class="mt-8 text-[#0074d9] font-medium">Tiếp tục mua sắm</button>
+                </div>`
+                modal.classList.remove('hidden')
+                modal.classList.add('flex')
+                return
+            }
+            
+            let html = ''
+            let total = 0
+            
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * (item.quantity || 1)
+                total += itemTotal
+                
+                html += `
+                <div class="flex gap-4 py-6 border-b last:border-0">
+                    <img src="${item.image}" class="w-20 h-20 object-contain bg-gray-50 rounded-2xl">
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h5 class="font-medium">${item.name}</h5>
+                            <button onclick="removeFromCart(${index});" class="text-red-500 text-sm">Xóa</button>
+                        </div>
+                        <div class="text-sm text-gray-400">${item.category}</div>
+                        <div class="flex justify-between items-end mt-auto">
+                            <div class="text-xl font-semibold">${item.price.toLocaleString('vi-VN')} ₫</div>
+                            <div class="flex border rounded-2xl items-center text-sm">
+                                <button onclick="changeQuantity(${index}, -1)" class="px-4 py-2">-</button>
+                                <span class="px-4">${item.quantity || 1}</span>
+                                <button onclick="changeQuantity(${index}, 1)" class="px-4 py-2">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            })
+            
+            container.innerHTML = html
+            
+            document.getElementById('cart-total').innerHTML = `
+                <span class="text-3xl">${total.toLocaleString('vi-VN')} ₫</span>
+            `
+            
+            modal.classList.remove('hidden')
+            modal.classList.add('flex')
+        }
+        
+        function hideCart() {
+            const modal = document.getElementById('cart-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function changeQuantity(index, delta) {
+            const item = cart[index]
+            if (!item) return
+            
+            item.quantity = (item.quantity || 1) + delta
+            
+            if (item.quantity < 1) item.quantity = 1
+            
+            showCart()
+            updateCartCount()
+        }
+        
+        function removeFromCart(index) {
+            cart.splice(index, 1)
+            showCart()
+            updateCartCount()
+        }
+        
+        function checkout() {
+            hideCart()
+            setTimeout(() => {
+                alert('🎉 Cảm ơn bạn đã mua hàng tại IMEX!\n\nĐơn hàng của bạn đã được xác nhận. Chúng tôi sẽ giao trong 2 giờ tới.')
+                cart = []
+                updateCartCount()
+            }, 800)
+        }
+        
+        // Filter category
+        function filterCategory(cat) {
+            if (cat === 'all') {
+                renderProducts()
+            } else {
+                const filtered = products.filter(p => p.category === cat)
+                renderProducts(filtered)
+            }
+            // Scroll to products
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' })
+        }
+        
+        function viewAllProducts() {
+            renderProducts()
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' })
+        }
+        
+        // Simple search
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay')
+            if (overlay.classList.contains('hidden')) {
+                overlay.classList.remove('hidden')
+                overlay.classList.add('flex')
+                document.getElementById('search-input').focus()
+            } else {
+                overlay.classList.add('hidden')
+                overlay.classList.remove('flex')
+            }
+        }
+        
+        function performSearch() {
+            const keyword = document.getElementById('search-input').value.toLowerCase().trim()
+            if (!keyword) return
+            
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(keyword)
+            )
+            
+            const container = document.getElementById('search-results')
+            container.innerHTML = `<div class="text-sm font-medium mb-4">Kết quả tìm kiếm cho <span class="text-[#0074d9]">"${keyword}"</span></div>`
+            
+            filtered.forEach(p => {
+                container.innerHTML += `
+                <div onclick="quickAddProduct(${p.id});" class="flex items-center gap-4 py-4 border-b cursor-pointer hover:bg-gray-50 rounded-2xl px-4">
+                    <img src="${p.image}" class="w-12 h-12 object-contain">
+                    <div class="flex-1">
+                        <div>${p.name}</div>
+                        <div class="text-[#001f3f] font-semibold">${p.price.toLocaleString('vi-VN')} ₫</div>
+                    </div>
+                </div>`
+            })
+            
+            if (filtered.length === 0) {
+                container.innerHTML += `<div class="py-12 text-center text-gray-400">Không tìm thấy kết quả</div>`
+            }
+        }
+        
+        function quickAddProduct(id) {
+            toggleSearch()
+            setTimeout(() => {
+                addToCart(id)
+            }, 300)
+        }
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            menu.classList.toggle('hidden')
+        }
+        
+        function toggleUserMenu() {
+            alert('👋 Xin chào Tumay!\nBạn đang xem tài khoản cá nhân IMEX.\n\n(Đây là demo - Chức năng đăng nhập đầy đủ sẽ được tích hợp khi triển khai thực tế)')
+        }
+        
         function navigateToSection(section) {
             const el = document.getElementById(section)
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth' })
             }
+            // Close mobile menu if open
+            const mobile = document.getElementById('mobile-menu')
+            if (mobile && !mobile.classList.contains('hidden')) toggleMobileMenu()
         }
         
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu')
-            const icon = document.getElementById('mobile-icon')
-            menu.classList.toggle('hidden')
-            icon.classList.toggle('fa-bars')
-            icon.classList.toggle('fa-xmark')
-        }
-        
-        function toggleCart() {
-            alert('🛒 Giỏ hàng của bạn có 3 sản phẩm. Bạn sẽ được chuyển đến trang giỏ hàng trong phiên bản đầy đủ!')
-        }
-        
-        function showLogin() {
-            alert('🔑 Chào mừng đến với IMEX!\n\nĐăng nhập / Đăng ký bằng số điện thoại hoặc Google/Apple ID.\n(Tính năng demo)')
-        }
-        
-        function exploreNow() {
-            navigateToSection('san-pham')
+        function shopNow() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' })
         }
         
         function watchVideo() {
-            alert('🎥 Video giới thiệu IMEX (1 phút 48 giây)\n\nBạn đang xem demo. Trong phiên bản thực tế sẽ nhúng video YouTube.')
+            alert('📺 Video giới thiệu IMEX đang phát...\n\n(Trong bản thực tế sẽ nhúng YouTube video giới thiệu nền tảng)')
         }
         
-        function addToCart(btn) {
-            btn.innerHTML = '✅ Đã thêm'
-            setTimeout(() => {
-                btn.innerHTML = 'Mua ngay'
-                alert('✅ Sản phẩm đã được thêm vào giỏ hàng!')
-            }, 1200)
+        // Initialize everything
+        function init() {
+            initializeTailwind()
+            renderProducts()
+            updateCartCount()
+            
+            console.log('%c✅ IMEX Website đã được tạo thành công! Màu chủ đạo: Xanh dương đậm + Trắng', 'color:#0074d9; font-family:monospace; font-size:13px')
+            console.log('Trang web hoàn chỉnh, responsive, có giỏ hàng, tìm kiếm, và các tính năng demo.')
         }
         
-        function openCompareModal() {
-            document.getElementById('compare-modal').classList.remove('hidden')
-            document.getElementById('compare-modal').classList.add('flex')
-        }
-        
-        function hideCompareModal() {
-            const modal = document.getElementById('compare-modal')
-            modal.classList.add('hidden')
-            modal.classList.remove('flex')
-        }
-        
-        function selectProduct(el) {
-            el.classList.toggle('border-[#e30613]')
-            el.classList.toggle('bg-red-50')
-        }
-        
-        function simulateComparison() {
-            hideCompareModal()
-            setTimeout(() => {
-                alert('📊 Kết quả so sánh đã được hiển thị!\n\niPhone 16 Pro Max vs Galaxy S25 Ultra vs Xiaomi 14T Pro\n\nBạn có thể xem bảng so sánh chi tiết trong phiên bản đầy đủ của website.')
-            }, 800)
-        }
-        
-        function checkWarranty() {
-            const input = document.getElementById('imei-input').value
-            if (input.length > 5) {
-                alert('✅ Bảo hành hợp lệ!\nThiết bị: iPhone 16 Pro Max\nThời hạn: Còn 18 tháng 12 ngày\nTrung tâm gần nhất: Vinh, Nghệ An')
-            } else {
-                alert('Vui lòng nhập IMEI / Serial number hợp lệ')
-            }
-        }
-        
-        function talkToAI() {
-            alert('🤖 IMEX AI: Chào bạn! Bạn đang tìm mua điện thoại nào? Mình có thể gợi ý dựa trên nhu cầu của bạn (pin trâu, camera đẹp, chơi game...). Hãy chat với mình nhé!')
-        }
-        
-        function joinCommunity() {
-            alert('👋 Chào mừng bạn đến với Cộng đồng IMEX!\nBạn đã được cấp tài khoản thử nghiệm ngay lập tức.')
-            navigateToSection('cong-dong')
-        }
-        
-        function viewAllProducts() {
-            navigateToSection('san-pham')
-        }
-        
-        // Start the app
+        // Run when loaded
         window.onload = init
     </script>
 </body>
