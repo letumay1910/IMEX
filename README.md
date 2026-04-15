@@ -1,5 +1,3 @@
-# IMEX
-Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -28,23 +26,23 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     --radius: 18px;
     --radius-sm: 10px;
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   html { scroll-behavior: smooth; }
-
+ 
   body {
     font-family: 'Be Vietnam Pro', sans-serif;
     background: var(--white);
     color: var(--blue-deep);
     overflow-x: hidden;
   }
-
+ 
   /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--gray-100); }
   ::-webkit-scrollbar-thumb { background: var(--blue-primary); border-radius: 3px; }
-
+ 
   /* ══════════════════════════════════════
      TOP BAR
   ══════════════════════════════════════ */
@@ -57,7 +55,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     letter-spacing: 0.5px;
   }
   .topbar span { color: var(--accent-cyan); font-weight: 600; }
-
+ 
   /* ══════════════════════════════════════
      HEADER
   ══════════════════════════════════════ */
@@ -79,7 +77,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     align-items: center;
     gap: 28px;
   }
-
+ 
   /* Logo */
   .logo {
     display: flex;
@@ -108,7 +106,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     line-height: 1;
   }
   .logo-text span { color: var(--blue-primary); }
-
+ 
   /* Search */
   .search-wrap {
     flex: 1;
@@ -144,7 +142,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .search-btn:hover { background: var(--blue-bright); transform: translateY(-50%) scale(1.06); }
   .search-btn svg { width: 16px; height: 16px; fill: var(--white); }
-
+ 
   /* Nav Actions */
   .nav-actions {
     display: flex;
@@ -177,7 +175,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     display: flex; align-items: center; justify-content: center;
     border: 2px solid var(--white);
   }
-
+ 
   /* Nav Menu */
   nav.main-nav {
     background: var(--blue-deep);
@@ -214,7 +212,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .nav-hot { color: var(--accent-gold) !important; font-weight: 600; }
   .nav-hot::before { content: '🔥 '; }
-
+ 
   /* ══════════════════════════════════════
      HERO BANNER
   ══════════════════════════════════════ */
@@ -242,7 +240,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     border-radius: 50%;
     pointer-events: none;
   }
-
+ 
   /* Geometric deco */
   .hero-geo {
     position: absolute;
@@ -259,12 +257,12 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   .hero-geo span:nth-child(1) { width: 320px; height: 320px; top: -80px; right: 80px; animation-delay: 0s; }
   .hero-geo span:nth-child(2) { width: 200px; height: 200px; top: 20px; right: 160px; animation-delay: 1s; }
   .hero-geo span:nth-child(3) { width: 120px; height: 120px; top: 70px; right: 210px; animation-delay: 2s; }
-
+ 
   @keyframes pulse-ring {
     0%, 100% { opacity: 0.4; transform: scale(1); }
     50% { opacity: 0.12; transform: scale(1.05); }
   }
-
+ 
   .hero-inner {
     max-width: 1280px;
     margin: 0 auto;
@@ -295,7 +293,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .hero-label::before { content: '●'; font-size: 8px; animation: blink 1.5s ease infinite; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
+ 
   .hero-title {
     font-family: 'Rajdhani', sans-serif;
     font-size: 56px;
@@ -356,7 +354,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     display: inline-flex; align-items: center; gap: 8px;
   }
   .btn-outline:hover { border-color: var(--accent-cyan); background: rgba(0,198,255,0.08); }
-
+ 
   .hero-stats {
     display: flex;
     gap: 32px;
@@ -372,7 +370,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .stat-num span { color: var(--accent-cyan); }
   .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
-
+ 
   /* Hero phone showcase */
   .hero-visual {
     display: flex;
@@ -435,7 +433,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     animation: glow 3s ease-in-out infinite;
   }
   @keyframes glow { 0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)} }
-
+ 
   .floating-badge {
     position: absolute;
     background: var(--white);
@@ -455,12 +453,12 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .fb-icon { font-size: 20px; }
   .fb-val { font-size: 16px; font-weight: 700; color: var(--blue-primary); }
-
+ 
   @keyframes fadeSlideUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
+ 
   /* ══════════════════════════════════════
      SECTION COMMON
   ══════════════════════════════════════ */
@@ -496,7 +494,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .see-all:hover { gap: 8px; }
   .see-all::after { content: '→'; }
-
+ 
   /* ══════════════════════════════════════
      BRAND CATEGORIES
   ══════════════════════════════════════ */
@@ -545,7 +543,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     letter-spacing: 1px;
   }
   .brand-count { font-size: 11px; color: var(--gray-400); }
-
+ 
   /* ══════════════════════════════════════
      FLASH SALE BANNER
   ══════════════════════════════════════ */
@@ -601,7 +599,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .count-box .lbl { font-size: 9px; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; }
   .count-sep { color: rgba(255,255,255,0.6); font-size: 24px; font-weight: 700; }
-
+ 
   /* ══════════════════════════════════════
      PRODUCT GRID
   ══════════════════════════════════════ */
@@ -643,7 +641,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     transition: transform 0.3s;
   }
   .product-card:hover .product-img-inner { transform: scale(1.08); }
-
+ 
   .product-tag {
     position: absolute;
     top: 10px; left: 10px;
@@ -657,7 +655,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .product-tag.new { background: var(--blue-primary); }
   .product-tag.hot { background: #ff6b35; }
-
+ 
   .product-wish {
     position: absolute;
     top: 10px; right: 10px;
@@ -671,7 +669,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
   .product-wish:hover { transform: scale(1.15); background: var(--white); }
-
+ 
   .product-info { padding: 14px; }
   .product-brand {
     font-size: 11px;
@@ -741,7 +739,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .product-btn:hover { background: var(--blue-bright); transform: scale(1.01); }
   .product-btn:active { transform: scale(0.98); }
-
+ 
   /* ══════════════════════════════════════
      PROMO BANNERS GRID
   ══════════════════════════════════════ */
@@ -804,7 +802,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     transition: background 0.15s;
   }
   .promo-btn:hover { background: rgba(255,255,255,0.25); }
-
+ 
   /* ══════════════════════════════════════
      CATEGORY ICONS
   ══════════════════════════════════════ */
@@ -834,7 +832,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   .cat-icon { font-size: 28px; }
   .cat-name { font-size: 11px; font-weight: 600; color: var(--blue-deep); line-height: 1.3; }
-
+ 
   /* ══════════════════════════════════════
      FEATURES STRIP
   ══════════════════════════════════════ */
@@ -874,7 +872,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     margin-bottom: 3px;
   }
   .feature-text p { font-size: 12px; color: rgba(255,255,255,0.5); }
-
+ 
   /* ══════════════════════════════════════
      FOOTER
   ══════════════════════════════════════ */
@@ -942,7 +940,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     color: rgba(255,255,255,0.5);
     letter-spacing: 0.5px;
   }
-
+ 
   /* ══════════════════════════════════════
      RESPONSIVE
   ══════════════════════════════════════ */
@@ -967,14 +965,14 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
 </style>
 </head>
 <body>
-
+ 
 <!-- TOP BAR -->
 <div class="topbar">
   🚀 Miễn phí vận chuyển cho đơn hàng từ <span>2.000.000đ</span> &nbsp;|&nbsp; 
   Hotline: <span>1800-IMEX</span> &nbsp;|&nbsp; 
   Đổi trả <span>30 ngày</span> — bảo hành chính hãng
 </div>
-
+ 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
@@ -982,14 +980,14 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
       <div class="logo-icon">IM</div>
       <div class="logo-text">IMEX<span>.</span></div>
     </a>
-
+ 
     <div class="search-wrap">
       <input type="text" placeholder="Tìm kiếm iPhone, Samsung, OPPO, Xiaomi...">
       <button class="search-btn">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35" stroke-linecap="round"/></svg>
       </button>
     </div>
-
+ 
     <div class="nav-actions">
       <button class="nav-btn" onclick="alert('Đăng nhập tài khoản IMEX')">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -1011,7 +1009,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
       </button>
     </div>
   </div>
-
+ 
   <!-- NAV MENU -->
   <nav class="main-nav">
     <div class="nav-inner">
@@ -1030,7 +1028,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </nav>
 </header>
-
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-geo">
@@ -1067,7 +1065,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         </div>
       </div>
     </div>
-
+ 
     <div class="hero-visual">
       <div class="floating-badge left">
         <span class="fb-icon">🏆</span>
@@ -1096,7 +1094,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </div>
 </section>
-
+ 
 <!-- BRANDS -->
 <div class="brands-strip">
   <div class="brands-inner">
@@ -1134,7 +1132,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </div>
 </div>
-
+ 
 <!-- FLASH SALE -->
 <div style="max-width:1280px;margin:0 auto;padding:32px 24px 0;">
   <div class="flash-banner">
@@ -1155,7 +1153,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     <button class="btn-primary" style="flex-shrink:0">Xem ngay →</button>
   </div>
 </div>
-
+ 
 <!-- CATEGORIES -->
 <div class="section" id="categories">
   <div class="section-header">
@@ -1173,7 +1171,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     <div class="cat-item"><div class="cat-icon">🛡️</div><div class="cat-name">Ốp lưng & Dán màn</div></div>
   </div>
 </div>
-
+ 
 <!-- PROMO BANNERS -->
 <div class="section" style="padding-top:0">
   <div class="promo-grid">
@@ -1203,7 +1201,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </div>
 </div>
-
+ 
 <!-- PRODUCTS - FEATURED -->
 <div class="section" id="products">
   <div class="section-header">
@@ -1211,7 +1209,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     <div class="see-all">Xem tất cả</div>
   </div>
   <div class="product-grid">
-
+ 
     <!-- Product 1 -->
     <div class="product-card">
       <div class="product-img" style="background:#f0f4ff">
@@ -1233,7 +1231,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         <button class="product-btn" onclick="alert('Đã thêm vào giỏ hàng!')">Thêm vào giỏ</button>
       </div>
     </div>
-
+ 
     <!-- Product 2 -->
     <div class="product-card">
       <div class="product-img" style="background:#fff8f0">
@@ -1255,7 +1253,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         <button class="product-btn" onclick="alert('Đã thêm vào giỏ hàng!')">Thêm vào giỏ</button>
       </div>
     </div>
-
+ 
     <!-- Product 3 -->
     <div class="product-card">
       <div class="product-img" style="background:#f0fff8">
@@ -1277,7 +1275,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         <button class="product-btn" onclick="alert('Đã thêm vào giỏ hàng!')">Thêm vào giỏ</button>
       </div>
     </div>
-
+ 
     <!-- Product 4 -->
     <div class="product-card">
       <div class="product-img" style="background:#fff0f8">
@@ -1299,7 +1297,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         <button class="product-btn" onclick="alert('Đã thêm vào giỏ hàng!')">Thêm vào giỏ</button>
       </div>
     </div>
-
+ 
     <!-- Product 5 -->
     <div class="product-card">
       <div class="product-img" style="background:#f5f0ff">
@@ -1321,10 +1319,10 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
         <button class="product-btn" onclick="alert('Đã thêm vào giỏ hàng!')">Thêm vào giỏ</button>
       </div>
     </div>
-
+ 
   </div>
 </div>
-
+ 
 <!-- FEATURES -->
 <div class="features-strip">
   <div class="features-inner">
@@ -1358,7 +1356,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </div>
 </div>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1418,7 +1416,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
     </div>
   </div>
 </footer>
-
+ 
 <script>
   // Countdown timer
   let totalSeconds = 6 * 3600 + 24 * 60;
@@ -1433,7 +1431,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
   }
   setInterval(updateCountdown, 1000);
   updateCountdown();
-
+ 
   // Brand chip active
   document.querySelectorAll('.brand-chip').forEach(chip => {
     chip.addEventListener('click', function() {
@@ -1441,7 +1439,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
       this.classList.add('active');
     });
   });
-
+ 
   // Nav item active
   document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', function() {
@@ -1449,7 +1447,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
       this.classList.add('active');
     });
   });
-
+ 
   // Wishlist toggle
   document.querySelectorAll('.product-wish').forEach(btn => {
     btn.addEventListener('click', function(e) {
@@ -1457,7 +1455,7 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
       this.textContent = this.textContent === '🤍' ? '❤️' : '🤍';
     });
   });
-
+ 
   // Scroll reveal
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1470,3 +1468,4 @@ Nền tảng Thương mại điện tử chuyên biệt Thiết bị di động
 </script>
 </body>
 </html>
+ 
