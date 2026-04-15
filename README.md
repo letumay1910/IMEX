@@ -1,186 +1,182 @@
-// models/Product.js
+IMEX/
+│
+├── backend/
+│   ├── server.js
+│   ├── models/
+│   │   └── Product.js
+│   ├── routes/
+│   │   └── productRoutes.js
+│   └── .env
+│
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   ├── script.js
+│   └── images/
+│       └── logo.png
+│
+└── package.json
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const productRoutes = require('./routes/productRoutes');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Kết nối tới MongoDB
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.log(err));
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api/products', productRoutes);
+
+// Khởi chạy server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  name: { type: String, required: true },           // Tên điện thoại (iPhone 16 Pro, Samsung S25...)
-  brand: { type: String, required: true },          // Apple, Samsung, Xiaomi, Oppo...
-  category: { type: String, enum: ['smartphone', 'tablet', 'accessory'] },
-  price: { type: Number, required: true },          // Giá bán (VND)
-  originalPrice: Number,                            // Giá gốc (để hiển thị giảm giá)
-  stock: { type: Number, default: 0 },
-  variants: [{                                      // Biến thể: màu sắc, RAM, ROM
-    color: String,
-    ram: String,
-    storage: String,
-    priceVariant: Number,
-    stockVariant: Number
-  }],
-  specifications: {                                 // Thông số kỹ thuật
-    screen: String,
-    camera: String,
-    battery: String,
-    processor: String,
-    os: String
-  },
-  images: [String],                                 // URL ảnh (Cloudinary)
-  description: String,
-  warranty: { type: Number, default: 12 },          // Bảo hành (tháng)
-  isFeatured: { type: Boolean, default: false },
-  rating: { type: Number, default: 0 },
-  reviewCount: { type: Number, default: 0 },
-  createdAt: { type: Date, default: Date.now }
+    name: String,
+    specifications: Object,
+    price: Number,
+    image: String,
+    reviews: [String],
 });
 
 module.exports = mongoose.model('Product', productSchema);
-// models/Order.js
-const orderSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  items: [{
-    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    variant: Object,
-    quantity: Number,
-    price: Number
-  }],
-  totalAmount: Number,
-  status: { 
-    type: String, 
-    enum: ['pending', 'confirmed', 'shipping', 'delivered', 'cancelled'],
-    default: 'pending' 
-  },
-  paymentMethod: { type: String, enum: ['COD', 'VNPay', 'Momo'] },
-  shippingAddress: {
-    fullName: String,
-    phone: String,
-    address: String,
-    city: String,
-    district: String
-  },
-  createdAt: { type: Date, default: Date.now }
-});
-
-module.exports = mongoose.model('Order', orderSchema);
 const express = require('express');
-const router = express.Router();
 const Product = require('../models/Product');
 
-// Lấy danh sách sản phẩm (có filter theo brand, giá, category)
+const router = express.Router();
+
+// Lấy danh sách sản phẩm
 router.get('/', async (req, res) => {
-  const { brand, minPrice, maxPrice, category, page = 1, limit = 20 } = req.query;
-  
-  let filter = {};
-  if (brand) filter.brand = brand;
-  if (category) filter.category = category;
-  if (minPrice || maxPrice) {
-    filter.price = {};
-    if (minPrice) filter.price.$gte = minPrice;
-    if (maxPrice) filter.price.$lte = maxPrice;
-  }
-
-  const products = await Product.find(filter)
-    .skip((page - 1) * limit)
-    .limit(parseInt(limit))
-    .sort({ createdAt: -1 });
-
-  res.json(products);
+    try {
+        const products = await Product.find();
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 
-// Chi tiết sản phẩm
-router.get('/:id', async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (!product) return res.status(404).json({ msg: 'Không tìm thấy sản phẩm' });
-  res.json(product);
-});
-
-// Admin: Thêm sản phẩm mới
+// Thêm sản phẩm mới
 router.post('/', async (req, res) => {
-  // ... validation & auth middleware
-  const newProduct = new Product(req.body);
-  await newProduct.save();
-  res.status(201).json(newProduct);
+    const product = new Product(req.body);
+    try {
+        const savedProduct = await product.save();
+        res.status(201).json(savedProduct);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
 
 module.exports = router;
-// src/pages/Products.js
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMEX - Nền tảng Thương mại điện tử</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>IMEX - Thương mại điện tử thiết bị di động</h1>
+        <nav>
+            <ul>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#community">Cộng đồng</a></li>
+                <li><a href="#warranty">Bảo hành</a></li>
+            </ul>
+        </nav>
+    </header>
 
-const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [filters, setFilters] = useState({ brand: '', minPrice: '', maxPrice: '' });
+    <main>
+        <section id="products">
+            <h2>Sản phẩm nổi bật</h2>
+            <div id="product-list"></div>
+        </section>
 
-  useEffect(() => {
-    fetchProducts();
-  }, [filters]);
+        <section id="community">
+            <h2>Cộng đồng người dùng công nghệ</h2>
+            <p>Chia sẻ đánh giá và thảo luận về thiết bị di động</p>
+        </section>
 
-  const fetchProducts = async () => {
-    const res = await axios.get('/api/products', { params: filters });
-    setProducts(res.data);
-  };
+        <section id="warranty">
+            <h2>Thông tin bảo hành</h2>
+            <p>Tra cứu thông tin bảo hành thiết bị</p>
+        </section>
+    </main>
 
-  return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">IMEX Mobile - Thiết bị di động chính hãng</h1>
-      
-      {/* Bộ lọc */}
-      <div className="flex gap-4 mb-8">
-        <select onChange={(e) => setFilters({...filters, brand: e.target.value})}>
-          <option value="">Tất cả thương hiệu</option>
-          <option value="Apple">Apple</option>
-          <option value="Samsung">Samsung</option>
-          <option value="Xiaomi">Xiaomi</option>
-        </select>
-        {/* Thêm filter giá, category... */}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map(product => (
-          <div key={product._id} className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
-            <img src={product.images[0]} alt={product.name} className="w-full h-64 object-cover" />
-            <div className="p-4">
-              <h3 className="font-semibold text-lg">{product.name}</h3>
-              <p className="text-red-600 font-bold text-xl">
-                {product.price.toLocaleString('vi-VN')} ₫
-              </p>
-              {product.originalPrice && (
-                <p className="line-through text-gray-500">
-                  {product.originalPrice.toLocaleString('vi-VN')} ₫
-                </p>
-              )}
-              <button 
-                onClick={() => addToCart(product)}
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-              >
-                Thêm vào giỏ
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export default Products;
-npm install vnpay
-import { VNPay } from 'vnpay';
-
-const vnpay = new VNPay({
-  tmnCode: process.env.VNP_TMN_CODE!,
-  secureSecret: process.env.VNP_HASH_SECRET!,
-  vnpayHost: 'https://sandbox.vnpayment.vn', // production thì đổi sang https://vnpayment.vn
-  testMode: true,
-});
-
-export async function POST(req: Request) {
-  const { orderId, amount, orderInfo } = await req.json();
-
-  const paymentUrl = vnpay.buildPaymentUrl({
-    vnp_Amount: amount * 100,           // nhân 100 vì VNPay dùng đơn vị nhỏ nhất
-    vnp_TxnRef: orderId,
-    vnp_OrderInfo: orderInfo || 'Thanh toán đơn hàng IMEX',
-    vnp_ReturnUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/vnpay-return`,
-    vnp_IpAddr: '127.0.0.1', // lấy từ headers thực tế
-  });
-
-  return Response.json({ paymentUrl });
+    <footer>
+        <p>&copy; 2026 IMEX. Tất cả quyền được bảo lưu.</p>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
 }
+
+header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+    margin: 20px 0;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+}
+const productListDiv = document.getElementById('product-list');
+
+fetch('/api/products')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.innerHTML = `<h3>${product.name}</h3>
+                                    <p>Giá: ${product.price} VNĐ</p>
+                                    <img src="${product.image}" alt="${product.name}" style="width: 100px;"/><br>
+                                    <p>${product.specifications.join(', ')}</p>`;
+            productListDiv.appendChild(productDiv);
+        });
+    })
+    .catch(error => console.error('Error:', error));
+MONGODB_URI=mongodb://<username>:<password>@localhost:27017/imex
